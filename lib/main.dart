@@ -5,6 +5,7 @@ import 'package:contact_app/providers/ContactProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//Contact app
 void main() {
   runApp(const MyApp());
 }
