@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 class DbSQLiteHelper{
 
-  static final String create_table_contact = '''create table $table_connect(
+  static final String _create_table_contact = '''create table $table_connect(
   $table_connect_col_id integer primary key autoincrement,
   $table_connect_col_name text not null,
   $table_connect_col_phone text not null,
@@ -18,7 +18,7 @@ class DbSQLiteHelper{
     final dbPath = Path.join(rootPath, 'contact.db');
 
     return await openDatabase(dbPath, version: 1, onCreate:(db, version) async{
-      await db.execute(create_table_contact);
+      await db.execute(_create_table_contact);
     });
   }
 
@@ -36,5 +36,11 @@ class DbSQLiteHelper{
     //  Contact(name: 'abc', phone: '123456', email: 'teshchd', address: 'sssfsdfdsf'),
     //  Contact(name: 'def', phone: '12423423456', email: 'teshchd', address: 'sssfsdfdsf'),
     //];
+  }
+
+  static Future<Contact> getAllContactByID(int id) async{
+    final db = await open();
+    final List<Map<String, dynamic>> mapList = await db.query(table_connect,where: '$table_connect_col_id = ?', whereArgs: [id]);
+    return Contact.fromMap(mapList.first);
   }
 }

@@ -1,4 +1,5 @@
-import 'package:contact_app/models/contact_model.dart';
+import 'package:contact_app/custom_widget/conact_item.dart';
+//import 'package:contact_app/models/contact_model.dart';
 import 'package:contact_app/pages/contact_details_page.dart';
 import 'package:contact_app/providers/ContactProvider.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'new_contact_page.dart';
 
 class ContactListPage extends StatefulWidget {
-  //const ContactListPage({Key? key}) : super(key: key);
   static final String routeName = '/contact_list';
 
   @override
@@ -53,16 +53,7 @@ class _ContactListPageState extends State<ContactListPage> {
           itemCount: provider.contacts.length,
           itemBuilder: (context, index) {
             final contact = provider.contacts[index];
-            return Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  //onTap: () => Navigator.pushNamed(context, ContactDetailsPage.routeName, arguments: contact.id),
-                  title: Text(contact.name),
-                  subtitle: Text(contact.phone),
-                ),
-              ),
-            );
+            return ContactItem(contact);
           },
         ),
       ),

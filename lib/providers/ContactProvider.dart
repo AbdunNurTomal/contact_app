@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 
 class ContactProvider with ChangeNotifier{
   List<Contact> _contactList = [];
+  //Contact? contact;
   List<Contact> get contacts => _contactList;
 
   Future<int> addContact(Contact contact) async{
@@ -13,6 +14,10 @@ class ContactProvider with ChangeNotifier{
   void getContacts() async{
     _contactList = await DbSQLiteHelper.getAllContact();
     notifyListeners();
+  }
+
+  Future<Contact>getContactByID(int id){
+    return DbSQLiteHelper.getAllContactByID(id);
   }
 
 }
